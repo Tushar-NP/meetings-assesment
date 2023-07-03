@@ -1,0 +1,101 @@
+/*
+  $breakpoint arguement choices:
+  - phone
+  - tab-port
+  -tab-land
+  -big-desktop
+  
+  1em = 16px
+  */
+@mixin respond($breakpoint) {
+  @if $breakpoint == phone-s {
+    @media only screen and (max-width: 520px) {
+      //600px
+      @content;
+    }
+  }
+
+  @if $breakpoint == phone {
+    @media only screen and (max-width: 767px) {
+      //600px
+      @content;
+    }
+  }
+
+  @if $breakpoint == tab-port {
+    @media only screen and (max-width: 850px) {
+      //820px
+      @content;
+    }
+  }
+  @if $breakpoint == tab {
+    @media only screen and (max-width: 996px) {
+      //820px
+      @content;
+    }
+  }
+  @if $breakpoint == tab-land {
+    @media only screen and (min-width: 992px) and (max-width: 1199px) {
+      //1200px
+      @content;
+    }
+  }
+  @if $breakpoint == big-desktop {
+    @media only screen and (min-width: 1200px) {
+      //1800px
+      @content;
+    }
+  }
+
+  @if $breakpoint == large-desktop {
+    @media only screen and (min-width: 2049px) {
+      //1800px
+      @content;
+    }
+  }
+}
+@mixin image-breakpoint {
+  @media only screen and (max-width: 1500px) {
+    width: 80%;
+  }
+  @media only screen and (max-width: 1470px) {
+    width: 82%;
+  }
+
+  @media only screen and (max-width: 1450px) {
+    width: 84%;
+  }
+  @media only screen and (max-width: 1410px) {
+    width: 86%;
+  }
+  @media only screen and (max-width: 1385px) {
+    width: 88%;
+  }
+  @media only screen and (max-width: 1365px) {
+    width: 90%;
+  }
+  @media only screen and (max-width: 1339px) {
+    width: 92%;
+  }
+  @media only screen and (max-width: 1305px) {
+    width: 94%;
+  }
+  @media only screen and (max-width: 1285px) {
+    width: 96%;
+  }
+  @media only screen and (max-width: 1265px) {
+    width: 98%;
+  }
+  @media only screen and (max-width: 820px) {
+    width: 81%;
+  }
+  @media only screen and (max-width: 800px) {
+    width: 83%;
+  }
+  @media only screen and (max-width: 780px) {
+    width: 85%;
+  }
+  @media only screen and (max-width: 760px) {
+    width: 88%;
+  }
+}

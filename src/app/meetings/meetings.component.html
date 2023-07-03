@@ -1,0 +1,68 @@
+<mat-card class="header">
+  <h1 class="heading---primary">Manage Meetings</h1>
+</mat-card>
+
+<mat-card class="meeting--card">
+  <mbsc-eventcalendar
+    [data]="meetings"
+    [options]="calendarOptions"
+    displayTimezone="Asia/Calcutta"
+    [(selectedDate)]="calendarSelectedDate"
+  >
+  </mbsc-eventcalendar>
+  <mbsc-popup
+    [options]="popupOptions"
+    [anchor]="popupAnchor"
+    [buttons]="popupButtons"
+    [headerText]="popupHeaderText"
+    #popup
+  >
+    <div class="mbsc-form-group">
+      <mbsc-input
+        name="title"
+        label="Title"
+        [(ngModel)]="popupEventTitle"
+      ></mbsc-input>
+
+      <mbsc-textarea
+        label="Description"
+        [(ngModel)]="popupEventDescription"
+        name="description"
+      ></mbsc-textarea>
+    </div>
+    <div class="mbsc-form-group">
+      <mbsc-switch label="All-day" [(ngModel)]="popupEventAllDay"></mbsc-switch>
+
+      <mbsc-select
+        [data]="myData"
+        [(ngModel)]="popupEventUsername"
+        [selectMultiple]="true"
+        [touchUi]="false"
+        label="Members"
+      >
+      </mbsc-select>
+      <mbsc-datepicker
+        [(ngModel)]="popupEventDates"
+        [options]="datePickerOptions"
+        [controls]="datetimePickerControls"
+        [responsive]="
+          popupEventAllDay ? datePickerResponsive : datetimePickerResponsive
+        "
+        [startInput]="startInput"
+        [endInput]="endInput"
+      ></mbsc-datepicker>
+      <mbsc-input #startInput label="Starts" name="start"></mbsc-input>
+      <mbsc-input #endInput label="Ends" name="end"></mbsc-input>
+
+      <div *ngIf="isEdit" class="mbsc-button-group">
+        <mbsc-button
+          class="mbsc-button-block"
+          color="danger"
+          variant="outline"
+          (click)="onDeleteClick()"
+          >Delete event
+        </mbsc-button>
+      </div>
+    </div>
+  </mbsc-popup>
+</mat-card>

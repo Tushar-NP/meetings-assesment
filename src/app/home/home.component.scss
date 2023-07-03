@@ -1,0 +1,45 @@
+@import "../../styles/abstracts/variables";
+
+.features--section {
+  // padding: 20px 10px 0;
+
+  background-color: $backgroundColor;
+  display: flex;
+  margin: auto;
+
+  .img {
+    width: 100%;
+    margin-bottom: 30px;
+  }
+  .side--nav {
+    padding-right: 15px;
+    padding: 20px;
+    display: flex;
+    width: 10vw;
+    flex-direction: column;
+    justify-content: space-between;
+    &-list {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+    &-item {
+      color: $black;
+      font-size: $font-large-x;
+      margin-bottom: 30px;
+      display: flex;
+      align-items: self-end;
+    }
+    .icon {
+      margin-right: 5px;
+    }
+
+    :hover {
+      cursor: pointer;
+    }
+  }
+
+  .content {
+    flex: 1;
+  }
+}

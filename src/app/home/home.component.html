@@ -1,0 +1,33 @@
+<div class="card">
+  <div class="div">
+    <div class="features--section">
+      <nav class="side--nav">
+        <div>
+          <img src="../../assets/logo.png" class="img" alt="" />
+          <ul class="side--nav-list">
+            <li class="side--nav-item" routerLink="/home">
+              <span class="material-symbols-outlined icon"> bar_chart </span
+              >Dashboard
+            </li>
+            <li class="side--nav-item" routerLink="user" *ngIf="admin">
+              <span class="material-symbols-outlined icon"> group </span>Users
+            </li>
+            <li class="side--nav-item" routerLink="meeting">
+              <span class="material-symbols-outlined icon"> meeting_room </span
+              >Meetings
+            </li>
+          </ul>
+        </div>
+
+        <p (click)="logout()">
+          <span class="material-symbols-outlined icon"> logout </span>
+          Logout
+        </p>
+      </nav>
+
+      <div class="content">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</div>

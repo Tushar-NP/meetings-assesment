@@ -1,0 +1,86 @@
+<div class="form--container">
+  <h1>{{ update ? "Update User" : "Let's Register a User" }}</h1>
+  <form #registerUser="ngForm" [formGroup]="form">
+    <!-- <mat-card class="form"> -->
+
+    <mat-form-field appearance="fill" class="input--feild">
+      <mat-label>Enter Full Name</mat-label>
+      <input matInput placeholder="Name" name="name" formControlName="name" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="input--feild">
+      <mat-label>Enter Username</mat-label>
+      <input
+        matInput
+        placeholder="Username"
+        name="username"
+        formControlName="username"
+      />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Select Role</mat-label>
+      <mat-select formControlName="role">
+        <mat-option value="one">ROLE_ADMIN</mat-option>
+        <mat-option value="two">ROLE_USER</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="input--feild">
+      <mat-label>Select Gender</mat-label>
+      <mat-select formControlName="gender">
+        <mat-option value="one">Male</mat-option>
+        <mat-option value="two">Female</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Enter your password</mat-label>
+      <input
+        matInput
+        [type]="hide ? 'password' : 'text'"
+        placeholder="Password"
+        name="password"
+        formControlName="password"
+      />
+      <button
+        mat-icon-button
+        matSuffix
+        (click)="hide = !hide"
+        [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hide"
+      >
+        <mat-icon class="icon">{{
+          hide ? "visibility_off" : "visibility"
+        }}</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="input--feild">
+      <mat-label>Enter Age</mat-label>
+      <input matInput placeholder="Age" name="age" formControlName="age" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="input--feild email">
+      <mat-label>Enter Email</mat-label>
+      <input
+        matInput
+        placeholder="Email"
+        name="email"
+        formControlName="email"
+      />
+    </mat-form-field>
+    <!-- </mat-card> -->
+  </form>
+
+  <button
+    mat-raised-button
+    color="primary"
+    class="btn"
+    (click)="createUser(registerUser.value)"
+    (keyup.enter)="onEnter(registerUser.value)"
+  >
+    {{ update ? "Update User" : "Create User" }}
+  </button>
+  <button mat-raised-button mat-dialog-close class="btn">Cancel</button>
+</div>

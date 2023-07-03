@@ -1,0 +1,124 @@
+@import "../../styles/abstracts/variables";
+
+.dashboard {
+  display: flex;
+
+  .meeting--section {
+    background-color: $white;
+    padding: 20px;
+
+    .date--card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      .heading--secondary {
+        margin-bottom: 0;
+        font-size: $font-large-xx;
+      }
+      .date {
+        color: $color-gray-5;
+        font-weight: 500;
+      }
+      .icon {
+        background-color: $black;
+        color: $white;
+        border-radius: 50px;
+        padding: 10px;
+      }
+    }
+
+    .meeting--card {
+      background-image: linear-gradient(to bottom right, #e9e6ce, #b8c5c5);
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+
+      .meeting--info {
+        margin: 10px 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      .btn {
+        background: transparent;
+        padding: 5px;
+        width: fit-content;
+        border: 1px solid black;
+      }
+
+      .img {
+        height: 200px;
+        width: 200px;
+      }
+    }
+
+    .meetings {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      margin-top: 20px;
+
+      .today--meetings {
+        background-image: linear-gradient(to right, #e5cec4, #f5d8c6);
+        width: fit-content;
+        justify-content: space-between;
+
+        .meeting--info {
+          .heading--secondary {
+            font-size: $font-meduim-x !important;
+          }
+          padding: 20px;
+        }
+        .img {
+          height: 150px;
+        }
+      }
+
+      .upcoming--meetings {
+        background-image: linear-gradient(to bottom right, #f3d9c6, #f5d8c6);
+        width: fit-content;
+        align-items: end;
+        justify-content: space-between;
+
+        .meeting--info {
+          .heading--secondary {
+            font-size: $font-meduim-x !important;
+          }
+          padding: 20px;
+        }
+      }
+    }
+  }
+
+  .user--section {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    flex: 1;
+    .card {
+      background: transparent;
+      padding: 10px 20px;
+      border: 1px solid $color-gray-4;
+    }
+  }
+
+  .profile--section {
+    padding: 20px;
+    border-left: 1px solid $color-gray-5;
+
+    .user--details {
+      text-align: center;
+      .img {
+        height: 100px;
+        width: 100px;
+        border-radius: 1000px;
+      }
+
+      .user--name {
+        text-align: center;
+      }
+    }
+  }
+}

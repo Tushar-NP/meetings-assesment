@@ -1,0 +1,97 @@
+<div class="dashboard">
+  <div class="meeting--section">
+    <!-- Date Card -->
+    <div class="date--card">
+      <div>
+        <h2 class="heading--secondary">Today's Plan</h2>
+        <p class="date">{{ date }}</p>
+      </div>
+      <span class="material-symbols-outlined icon"> add </span>
+    </div>
+
+    <!-- Heading -->
+
+    <h1>Schedule Your da with schedule snap</h1>
+
+    <mat-card class="meeting--card">
+      <div class="meeting--info">
+        <div>
+          <h2>All meetings</h2>
+          <p>You have {{ allMeetings }} meetings in total</p>
+        </div>
+        <button class="btn" mat-button>View your meetings</button>
+      </div>
+
+      <img
+        src="../../assets/meet__1_-removebg-preview.png"
+        class="img"
+        alt=""
+      />
+    </mat-card>
+
+    <div class="meetings">
+      <mat-card class="today--meetings">
+        <div class="meeting--info">
+          <h2 class="heading--secondary">Today's Meeting</h2>
+          <span class="material-symbols-outlined icon">
+            today <span>{{ todayMeetings }} Meetings</span>
+          </span>
+        </div>
+        <img src="../../assets/today.png" alt="" class="img" />
+      </mat-card>
+
+      <mat-card class="upcoming--meetings">
+        <div class="meeting--info">
+          <h2 class="heading--secondary">Upcomming Meeting</h2>
+          <div>
+            <span class="material-symbols-outlined icon">
+              next_plan <span>{{ futureMeetings }} Meetings</span>
+            </span>
+          </div>
+        </div>
+        <img src="../../assets/upcoming.png" class="img" alt="" />
+      </mat-card>
+    </div>
+  </div>
+
+  <div class="user--section">
+    <h1>Users</h1>
+
+    <mat-card class="all--user-card card">
+      <h2>All Users</h2>
+      <h1>
+        <span class="material-symbols-outlined icon"> group </span>
+        {{ allUsers }}
+      </h1>
+      <p>
+        With the aid of schedule snap, these users put their trust in us to plan
+        their meeting.
+      </p>
+    </mat-card>
+
+    <mat-card class="active--card card">
+      <h2>Active Users</h2>
+      <h1>
+        <span class="material-symbols-outlined icon"> person </span>
+        {{ activeUsers }}
+      </h1>
+      <p>total amount of users who are currently active</p></mat-card
+    >
+    <mat-card class="inactive--card card">
+      <h2>Inactive Users</h2>
+      <h1>
+        <span class="material-symbols-outlined icon"> person_off </span>
+        {{ allUsers - activeUsers }}
+      </h1>
+      <p>total amount of users who are now inactive</p></mat-card
+    >
+  </div>
+
+  <div class="profile--section">
+    <div class="user--details">
+      <img src="../../assets/luffy.jpg" alt="" class="img" />
+      <h1 class="user--name">{{ name }}</h1>
+      <p>{{ role }}</p>
+    </div>
+  </div>
+</div>

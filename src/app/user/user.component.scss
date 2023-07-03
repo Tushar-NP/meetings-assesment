@@ -1,0 +1,75 @@
+@import "../../styles/abstracts/variables";
+
+.user--screen {
+  .header {
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 10px;
+    margin: 20px 10px;
+
+    .heading--primary {
+      font-size: $font-xlarge-x;
+      margin-bottom: 0;
+    }
+
+    .btn {
+      background-color: black;
+    }
+  }
+
+  .table--header {
+    padding: 10px 20px;
+    margin: 30px 10px;
+    background-color: $white;
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    justify-content: space-between;
+
+    .heading--primary {
+      font-size: $font-xlarge-x;
+      margin-bottom: 0;
+      margin-right: 50px;
+    }
+
+    mat-form-field {
+      width: 50%;
+      height: 60px;
+      margin: 0;
+    }
+
+    .mat-mdc-form-field-bottom-align {
+      display: none !important;
+    }
+
+    .icon--search {
+      position: absolute;
+      right: 0;
+    }
+  }
+
+  .table {
+    margin: 15px 10px;
+    border-radius: 10px !important;
+    overflow: hidden;
+
+    tr:nth-child(even) {
+      background-color: $backgroundColor;
+    }
+
+    :hover {
+      cursor: pointer;
+    }
+
+    .icon {
+      margin-right: 5px;
+    }
+
+    .icon--delete {
+      color: red;
+    }
+  }
+}

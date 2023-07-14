@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, Injectable, OnInit } from '@angular/core';
 import {
   MatDialog,
   MatDialogRef,
@@ -7,7 +7,11 @@ import {
 import { ServiceService } from '../service/service.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
+@Injectable({
+  providedIn: 'root',
+})
 @Component({
   selector: 'dialog-content-example',
   templateUrl: './createuser.component.html',
@@ -21,7 +25,8 @@ export class CreateuserComponent implements OnInit {
     private service: ServiceService,
     public dialogRef: MatDialogRef<CreateuserComponent>,
     @Inject(MAT_DIALOG_DATA) private data: any,
-    private router: Router
+    private router: Router,
+    private _snackBar: MatSnackBar
   ) {}
 
   form!: FormGroup;
@@ -37,6 +42,7 @@ export class CreateuserComponent implements OnInit {
       password: new FormControl('', [Validators.required]),
     });
 
+    console.log(this.form.value.password);
     if (this.data) {
       this.update = true;
       this.form.patchValue(this.data);
@@ -70,7 +76,6 @@ export class CreateuserComponent implements OnInit {
   }
 
   createUser(data: any) {
-    console.log(this.update);
     if (this.update) {
       this.service.updateUser(data);
     } else {
@@ -86,6 +91,8 @@ export class CreateuserComponent implements OnInit {
         }
       );
     }
-    if (this.dialogRef) this.dialogRef.close();
+    if (this.dialogRef) {
+      this.dialogRef.close();
+    }
   }
 }

@@ -1,0 +1,28 @@
+@import "../../../styles/abstracts/variables";
+
+.header {
+  background-color: $white;
+  padding: 20px;
+  margin: 10px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  .heading--primary {
+    text-transform: capitalize;
+    font-size: $font-xlarge-xx;
+    margin-bottom: 0;
+  }
+
+  .btn {
+    border-radius: 50%;
+  }
+
+  .icon {
+    margin-top: -10px;
+    margin-right: -2px;
+    font-size: $font-xlarge-x;
+    width: 30px;
+  }
+}

@@ -1,11 +1,10 @@
 @import "../../styles/abstracts/variables";
 
 .features--section {
-  // padding: 20px 10px 0;
-
   background-color: $backgroundColor;
   display: flex;
   margin: auto;
+  height: 100vh;
 
   .img {
     width: 100%;
@@ -37,9 +36,15 @@
     :hover {
       cursor: pointer;
     }
+
+    .logout {
+      display: flex;
+      align-items: center;
+    }
   }
 
   .content {
     flex: 1;
+    overflow-y: scroll;
   }
 }

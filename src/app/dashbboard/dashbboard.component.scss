@@ -1,11 +1,31 @@
 @import "../../styles/abstracts/variables";
 
+.header {
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 10px;
+  margin: 20px 10px;
+
+  .heading--primary {
+    font-size: $font-xlarge-x;
+    margin-bottom: 0;
+  }
+
+  .btn {
+    background-color: black;
+  }
+}
+
 .dashboard {
   display: flex;
 
   .meeting--section {
     background-color: $white;
     padding: 20px;
+    border-radius: 10px;
 
     .date--card {
       display: flex;

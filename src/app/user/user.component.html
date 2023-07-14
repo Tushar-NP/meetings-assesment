@@ -1,26 +1,22 @@
 <div class="user--screen">
-  <mat-card class="header">
-    <h1 class="heading--primary">Manage User</h1>
-    <button
-      mat-raised-button
-      color="primary"
-      class="btn"
-      (click)="createUser()"
-    >
-      Create User
-    </button>
-  </mat-card>
+  <app-header></app-header>
 
   <div>
     <div class="table--header">
       <h2 class="heading--primary">Users List</h2>
-      <mat-form-field appearance="outline">
-        <mat-label>Search User</mat-label>
-        <span class="material-symbols-outlined icon icon--search">
-          search
-        </span>
-        <input matInput (keyup)="searchUser($event)" #input />
-      </mat-form-field>
+
+      <div class="div">
+        <mat-form-field appearance="outline">
+          <mat-label>Search User</mat-label>
+          <span class="material-symbols-outlined icon icon--search">
+            search
+          </span>
+          <input matInput (keyup)="searchUser($event)" #input />
+        </mat-form-field>
+        <button mat-raised-button class="btn" (click)="createUser()">
+          create user
+        </button>
+      </div>
     </div>
   </div>
 

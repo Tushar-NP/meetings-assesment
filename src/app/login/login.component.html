@@ -30,8 +30,10 @@
               matInput
               [type]="hide ? 'password' : 'text'"
               formControlName="password"
+              (keyup.enter)="login(loginForm.value)"
             />
             <button
+              type="button"
               mat-icon-button
               matSuffix
               (click)="hide = !hide"
@@ -56,7 +58,6 @@
         mat-raised-button
         color="primary"
         class="btn"
-        (keyup.enter)="onEnter(loginForm.value)"
         (click)="login(loginForm.value)"
       >
         login

@@ -1,0 +1,20 @@
+<div class="notification">
+  <h1 class="notification__heading">
+    Notifications
+    <mat-icon color="accent" class="notification__icon icon"
+      >notifications_none</mat-icon
+    >
+  </h1>
+  <p
+    *ngIf="notificationsCount === 0 || notifications === undefined"
+    style="color: red; text-align: center"
+  >
+    No notifications
+  </p>
+  <div *ngFor="let d of notifications">
+    <h3 class="notification__title">{{ d.title }}</h3>
+    <p class="notification__summary">
+      {{ d.summary }}
+    </p>
+  </div>
+</div>

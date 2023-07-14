@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
   panelOpenState = false;
-  hidden = false;
+
   admin = false;
   date: any;
   user: any = [];
@@ -22,10 +22,15 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  toggleBadgeVisibility() {
-    this.hidden = !this.hidden;
-  }
   constructor(private service: ServiceService, private router: Router) {}
+
+  navigate(data: any) {
+    if (data == 'home') {
+      this.router.navigate(['/home']);
+    } else if (data == 'user') {
+      this.router.navigate(['user']);
+    }
+  }
 
   logout() {
     this.router.navigate(['']);

@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { login } from '../data.type';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, retry } from 'rxjs';
 import { Router } from '@angular/router';
+import { apiURL } from 'src/environment/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -13,27 +14,49 @@ export class ServiceService {
   users: any = [];
   allMeetings: any;
   futureMeetings: any;
-  todayMeetings: any;
+
   constructor(private http: HttpClient, private router: Router) {}
 
   // Login and Logout Function
 
   login(data: login) {
-    return this.http.post(
-      'http://192.168.0.65:9090/meets/login',
-      JSON.stringify(data),
-      {
-        observe: 'response',
-      }
-    );
+    return this.http.post(apiURL + `/login`, JSON.stringify(data), {
+      observe: 'response',
+    });
   }
 
   logout() {
-    this.http.get('http://192.168.0.65:9090/meets/login').subscribe(
-      (res) => {
-        console.log(res);
+    return this.http.get(apiURL + '/login');
+  }
+
+  forgetPassword(username: string) {
+    return this.http.post(
+      apiURL + '/forgot-password',
+      JSON.stringify(username)
+    );
+  }
+
+  otpLogin(data: any) {
+    console.log(JSON.stringify(data));
+    return this.http.post(apiURL + '/otp-login', JSON.stringify(data));
+  }
+
+  // admin operations (Create, Update, Delete)
+
+  createUser(data: any) {
+    return this.http.post(
+      apiURL + '/api-v1/admin/register-member',
+      JSON.stringify(data)
+    );
+  }
+
+  updateUser(data: any) {
+    console.log(data);
+    this.http.post(apiURL + '/api-v1/admin/update-member', data).subscribe(
+      (data: any) => {
+        console.log(data);
       },
-      (error: any) => {
+      (error) => {
         if (error.error == 'Token is Expired') {
           this.router.navigate(['']);
           localStorage.clear();
@@ -42,138 +65,64 @@ export class ServiceService {
     );
   }
 
-  forgetPassword(username: string) {
-    return this.http.post(
-      'http://192.168.0.65:9090/meets/forgot-password',
-      JSON.stringify(username)
-    );
-  }
-
-  otpLogin(data: any) {
-    console.log(JSON.stringify(data));
-    return this.http.post(
-      'http://192.168.0.65:9090/meets/otp-login',
-      JSON.stringify(data)
-    );
-  }
-
-  // admin operations (Create, Update, Delete)
-
-  createUser(data: any) {
-    return this.http.post(
-      'http://192.168.0.65:9090/meets/api-v1/admin/register-member',
-      JSON.stringify(data)
-    );
-  }
-
-  updateUser(data: any) {
-    console.log(data);
-    this.http
-      .post('http://192.168.0.65:9090/meets/api-v1/admin/update-member', data)
-      .subscribe(
-        (data: any) => {
-          console.log(data);
-        },
-        (error) => {
-          if (error.error == 'Token is Expired') {
-            this.router.navigate(['']);
-            localStorage.clear();
-          }
-        }
-      );
-  }
-
   deleteUser(userName: string) {
     return this.http.post(
-      'http://192.168.0.65:9090/meets/api-v1/admin/delete-member',
+      apiURL + '/api-v1/admin/delete-member',
       JSON.stringify(userName)
     );
   }
 
   //  Users API
   activeUser() {
-    return this.http.get(
-      'http://192.168.0.65:9090/meets/api-v1/user/active-users'
-    );
+    return this.http.get(apiURL + '/api-v1/user/active-users');
   }
 
   displayAllUser() {
-    return this.http.get(
-      'http://192.168.0.65:9090/meets/api-v1/admin/all-users'
-    );
+    return this.http.get(apiURL + '/api-v1/admin/all-users');
   }
 
   loogedInUser() {
-    this.http
-      .post('http://192.168.0.65:9090/meets/api-v1/user/member', null)
-      .subscribe(
-        (data) => {
-          console.log(data);
-        },
-        (error) => {
-          if (error.error == 'Token is Expired') {
-            this.router.navigate(['']);
-            localStorage.clear();
-          }
+    this.http.post(apiURL + '/api-v1/user/member', null).subscribe(
+      (data) => {
+        console.log(data);
+      },
+      (error) => {
+        if (error.error == 'Token is Expired') {
+          this.router.navigate(['']);
+          localStorage.clear();
         }
-      );
+      }
+    );
   }
 
   currentUser() {
-    return this.http.get('http://192.168.0.65:9090/meets/api-v1/user/profile');
+    return this.http.get(apiURL + '/api-v1/user/profile');
   }
 
   // Meetings API
 
   allMeeting() {
-    return this.http.get(
-      'http://192.168.0.65:9090/meets/api-v1/user/all-meetings'
-    );
+    return this.http.get(apiURL + '/api-v1/user/all-meetings');
   }
 
   createMeetings(data: any) {
-    this.http
-      .post(
-        'http://192.168.0.65:9090/meets/api-v1/user/register-meeting',
-        JSON.stringify(data)
-      )
-      .subscribe(
-        (result) => {
-          console.log(JSON.stringify(data));
-          console.log(result);
-        },
-        (error: any) => {
-          if (error.error == 'Token is Expired') {
-            this.router.navigate(['']);
-            localStorage.clear();
-          }
-        }
-      );
+    return this.http.post(
+      apiURL + '/api-v1/user/register-meeting',
+      JSON.stringify(data)
+    );
   }
 
-  deleteMeetings(meetid: number) {
-    this.http
-      .post(
-        'http://192.168.0.65:9090/meets/api-v1/user/delete-meeting',
-        JSON.stringify(meetid)
-      )
-      .subscribe(
-        (result) => {
-          console.log(JSON.stringify(meetid));
-          console.log(result);
-        },
-        (error: any) => {
-          if (error.error == 'Token is Expired') {
-            this.router.navigate(['']);
-            localStorage.clear();
-          }
-        }
-      );
+  deleteMeetings(data: number) {
+    let meetid = { meetid: data };
+    return this.http.post(
+      apiURL + '/api-v1/user/delete-meeting',
+      JSON.stringify(meetid)
+    );
   }
 
   rescheduleMeetings(data: any) {
     return this.http.post(
-      'http://192.168.0.65:9090/meets/api-v1/user/update-meeting',
+      apiURL + '/api-v1/user/update-meeting',
       JSON.stringify(data)
     );
   }

@@ -34,15 +34,6 @@
   padding: 100px 30px;
   width: 40vw;
   overflow-y: scroll;
-  &::-webkit-scrollbar {
-    width: 0.1rem;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    border-radius: 1em;
-    background-color: darkgrey;
-    outline: 1px solid slategrey;
-  }
 
   .heading--form {
     text-transform: uppercase;

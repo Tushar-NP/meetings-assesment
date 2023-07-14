@@ -1,0 +1,13 @@
+<mat-card class="header">
+  <h1 class="heading--primary">Manage User</h1>
+  <div>
+    <button mat-button [matMenuTriggerFor]="menu" class="btn" #menuTrigger>
+      <mat-icon matBadge="{{ notification }}" matBadgeColor="warn" class="icon">
+        notifications_none</mat-icon
+      >
+    </button>
+    <mat-menu #menu="matMenu">
+      <app-notification></app-notification>
+    </mat-menu>
+  </div>
+</mat-card>

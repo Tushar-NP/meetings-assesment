@@ -50,6 +50,15 @@ $schedule-snap-theme: mat.define-light-theme(
 body {
   margin: 0;
 }
+::-webkit-scrollbar {
+  width: 0.1rem;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 1em;
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
+}
 
 .icon {
   font-family: "Material Icons" !important;

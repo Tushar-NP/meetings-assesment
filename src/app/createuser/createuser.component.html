@@ -21,16 +21,16 @@
     <mat-form-field>
       <mat-label>Select Role</mat-label>
       <mat-select formControlName="role">
-        <mat-option value="one">ROLE_ADMIN</mat-option>
-        <mat-option value="two">ROLE_USER</mat-option>
+        <mat-option value="ROLE_ADMIN">ROLE_ADMIN</mat-option>
+        <mat-option value="ROLE_USER">ROLE_USER</mat-option>
       </mat-select>
     </mat-form-field>
 
     <mat-form-field appearance="fill" class="input--feild">
       <mat-label>Select Gender</mat-label>
       <mat-select formControlName="gender">
-        <mat-option value="one">Male</mat-option>
-        <mat-option value="two">Female</mat-option>
+        <mat-option value="Male">Male</mat-option>
+        <mat-option value="Female">Female</mat-option>
       </mat-select>
     </mat-form-field>
 
@@ -78,7 +78,8 @@
     color="primary"
     class="btn"
     (click)="createUser(registerUser.value)"
-    (keyup.enter)="onEnter(registerUser.value)"
+    (keyup.enter)="createUser(registerUser.value)"
+    [disabled]="!registerUser.valid"
   >
     {{ update ? "Update User" : "Create User" }}
   </button>

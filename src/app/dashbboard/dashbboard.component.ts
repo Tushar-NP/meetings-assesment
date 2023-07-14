@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ServiceService } from '../service/service.service';
 
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { CreatemeetingComponent } from '../createmeeting/createmeeting.component';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-dashbboard',
@@ -14,7 +17,13 @@ export class DashbboardComponent implements OnInit {
   allUsers: any;
   activeUsers: any;
   name: any;
-  constructor(private service: ServiceService, private router: Router) {}
+  start: any;
+  constructor(
+    private service: ServiceService,
+    private router: Router,
+    public dialog: MatDialog,
+    private datePipe: DatePipe
+  ) {}
   allMeetings: any;
   todayMeetings: any;
   futureMeetings: any;
@@ -52,7 +61,6 @@ export class DashbboardComponent implements OnInit {
 
     this.service.currentUser().subscribe(
       (result: any) => {
-        console.log(result);
         this.name = result.username;
       },
       (error) => {
@@ -76,5 +84,16 @@ export class DashbboardComponent implements OnInit {
         }
       }
     );
+  }
+
+  createMeeting() {
+    let d = new Date();
+    let start = this.datePipe.transform(d, 'yyyy-MM-dd HH:mm:ss');
+    let end = this.datePipe.transform(d, 'yyyy-MM-dd HH:mm:ss');
+
+    this.dialog.open(CreatemeetingComponent, {
+      data: { start, end },
+      width: '50%',
+    });
   }
 }

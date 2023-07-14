@@ -1,0 +1,14 @@
+@import "../../styles/abstracts/variables";
+
+.meeting--form {
+  margin: 10px;
+
+  mat-form-field {
+    margin-left: 5px;
+  }
+
+  .btn {
+    background-color: $black;
+    color: $white;
+  }
+}

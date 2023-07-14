@@ -1,0 +1,92 @@
+<div class="meeting--form">
+  <h1>{{ update ? "Update Meeting" : "Create Meeting" }}</h1>
+  <form #createmeeting="ngForm" class="example-form" [formGroup]="form">
+    <mat-form-field appearance="outline">
+      <mat-label>Title</mat-label>
+      <input
+        matInput
+        placeholder="title"
+        name="title"
+        formControlName="title"
+      />
+      <mat-error *ngIf="title && title.invalid && title.touched">
+        enter title</mat-error
+      >
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Description</mat-label>
+      <input
+        matInput
+        placeholder="title"
+        formControlName="description"
+        name="description"
+      />
+      <mat-error *ngIf="title && title.invalid && title.touched">
+        enter description</mat-error
+      >
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Start Date</mat-label>
+      <input
+        matInput
+        placeholder="Start Time"
+        name="start"
+        formControlName="start"
+      />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>End Date</mat-label>
+      <input
+        matInput
+        placeholder="Start Time"
+        name="end"
+        formControlName="end"
+      />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" *ngIf="!update">
+      <mat-label>Consecutive Days</mat-label>
+      <input
+        matInput
+        type="number"
+        placeholder="Consecutive Days"
+        name="consecutive"
+        formControlName="consecutive"
+      />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Select Member</mat-label>
+      <mat-select
+        multiple
+        formControlName="username"
+        [value]="form.get('members')?.value"
+      >
+        <mat-option *ngFor="let member of members" [value]="member">{{
+          member
+        }}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('username')?.errors?.['required']">
+        Select atleast 1 member
+      </mat-error>
+    </mat-form-field>
+  </form>
+
+  <button
+    mat-raised-button
+    class="btn"
+    (click)="createMeeting()"
+    [disabled]="!createmeeting.valid"
+  >
+    {{ update ? "Update Meeting" : "Create Meeting" }}
+  </button>
+  <button
+    mat-raised-button
+    class="btn"
+    *ngIf="update"
+    (click)="deleteMeeting()"
+  >
+    Delete Meeting
+  </button>
+</div>

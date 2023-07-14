@@ -1,25 +1,6 @@
 @import "../../styles/abstracts/variables";
 
 .user--screen {
-  .header {
-    display: flex;
-    flex-direction: row;
-    padding: 10px;
-    align-items: center;
-    justify-content: space-between;
-    border-radius: 10px;
-    margin: 20px 10px;
-
-    .heading--primary {
-      font-size: $font-xlarge-x;
-      margin-bottom: 0;
-    }
-
-    .btn {
-      background-color: black;
-    }
-  }
-
   .table--header {
     padding: 10px 20px;
     margin: 30px 10px;
@@ -35,6 +16,17 @@
       margin-right: 50px;
     }
 
+    .div {
+      width: 40%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .btn {
+        color: $white;
+        background-color: $black;
+        text-transform: capitalize;
+      }
+    }
     mat-form-field {
       width: 50%;
       height: 60px;

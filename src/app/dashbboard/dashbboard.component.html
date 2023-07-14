@@ -1,3 +1,5 @@
+<app-header></app-header>
+
 <div class="dashboard">
   <div class="meeting--section">
     <!-- Date Card -->
@@ -6,7 +8,9 @@
         <h2 class="heading--secondary">Today's Plan</h2>
         <p class="date">{{ date }}</p>
       </div>
-      <span class="material-symbols-outlined icon"> add </span>
+      <span class="material-symbols-outlined icon" (click)="createMeeting()">
+        add
+      </span>
     </div>
 
     <!-- Heading -->
@@ -85,13 +89,5 @@
       </h1>
       <p>total amount of users who are now inactive</p></mat-card
     >
-  </div>
-
-  <div class="profile--section">
-    <div class="user--details">
-      <img src="../../assets/luffy.jpg" alt="" class="img" />
-      <h1 class="user--name">{{ name }}</h1>
-      <p>{{ role }}</p>
-    </div>
   </div>
 </div>

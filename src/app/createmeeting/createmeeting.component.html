@@ -2,7 +2,7 @@
   <h1>{{ update ? "Update Meeting" : "Create Meeting" }}</h1>
   <form #createmeeting="ngForm" class="example-form" [formGroup]="form">
     <mat-form-field appearance="outline">
-      <mat-label>Title</mat-label>
+      <mat-label>Title </mat-label>
       <input
         matInput
         placeholder="title"
@@ -62,6 +62,7 @@
         multiple
         formControlName="username"
         [value]="form.get('members')?.value"
+        (click)="createMeeting()"
       >
         <mat-option *ngFor="let member of members" [value]="member">{{
           member
@@ -77,14 +78,22 @@
     mat-raised-button
     class="btn"
     (click)="createMeeting()"
-    [disabled]="!createmeeting.valid"
+    *ngIf="!update"
   >
-    {{ update ? "Update Meeting" : "Create Meeting" }}
+    Create Meeting
   </button>
   <button
     mat-raised-button
     class="btn"
-    *ngIf="update"
+    (click)="createMeeting()"
+    *ngIf="ishost"
+  >
+    Update Meeting
+  </button>
+  <button
+    mat-raised-button
+    class="btn"
+    *ngIf="ishost"
     (click)="deleteMeeting()"
   >
     Delete Meeting

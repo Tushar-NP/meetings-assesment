@@ -26,10 +26,12 @@ export class ForgetpasswordComponent {
     this.update = true;
     this.service.otpLogin(data).subscribe((result: any) => {
       console.log(result);
-      setTimeout(() => {
-        localStorage.setItem('token', result.token);
-        localStorage.setItem('role', result.role);
-      }, 400);
+      // setTimeout(() => {
+
+      // }, 400);
+
+      localStorage.setItem('token', result.token);
+      localStorage.setItem('role', result.role);
     });
   }
 

@@ -42,7 +42,6 @@ export class CreateuserComponent implements OnInit {
       password: new FormControl('', [Validators.required]),
     });
 
-    console.log(this.form.value.password);
     if (this.data) {
       this.update = true;
       this.form.patchValue(this.data);
@@ -71,17 +70,23 @@ export class CreateuserComponent implements OnInit {
     return this.form.get('password');
   }
 
-  onEnter(data: any) {
-    this.createUser(data);
-  }
-
-  createUser(data: any) {
+  createUser() {
     if (this.update) {
-      this.service.updateUser(data);
+      this.service.updateUser(this.form.value).subscribe(
+        (data: any) => {
+          this._snackBar.open(data.statusDesc, 'close');
+        },
+        (error) => {
+          if (error.error == 'Token is Expired') {
+            this.router.navigate(['']);
+            localStorage.clear();
+          }
+        }
+      );
     } else {
-      this.service.createUser(data).subscribe(
-        (result) => {
-          console.log(result);
+      this.service.createUser(this.form.value).subscribe(
+        (result: any) => {
+          this._snackBar.open(result.statusDesc, 'close', { duration: 5000 });
         },
         (error) => {
           if (error.error == 'Token is Expired') {

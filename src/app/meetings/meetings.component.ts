@@ -34,9 +34,9 @@ export class MeetingsComponent implements OnInit {
     },
   };
 
-  handleDateClick() {
+  handleDateClick(dateStr: any) {
     let date = new Date();
-    let start = this.datePipe.transform(date, 'yyyy-MM-dd HH:mm:ss');
+    let start = this.datePipe.transform(dateStr.date, 'yyyy-MM-dd HH:mm:ss');
     let end = this.datePipe.transform(date, 'yyyy-MM-dd HH:mm:ss');
     this.dialog.open(CreatemeetingComponent, {
       data: { start, end },

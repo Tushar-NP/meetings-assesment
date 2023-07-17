@@ -46,6 +46,7 @@
       <button
         mat-icon-button
         matSuffix
+        type="button"
         (click)="hide = !hide"
         [attr.aria-label]="'Hide password'"
         [attr.aria-pressed]="hide"
@@ -67,6 +68,7 @@
         matInput
         placeholder="Email"
         name="email"
+        (keyup.enter)="createUser()"
         formControlName="email"
       />
     </mat-form-field>
@@ -77,8 +79,7 @@
     mat-raised-button
     color="primary"
     class="btn"
-    (click)="createUser(registerUser.value)"
-    (keyup.enter)="createUser(registerUser.value)"
+    (click)="createUser()"
     [disabled]="!registerUser.valid"
   >
     {{ update ? "Update User" : "Create User" }}

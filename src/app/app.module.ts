@@ -19,7 +19,6 @@ import { DashbboardComponent } from './dashbboard/dashbboard.component';
 import { UserComponent } from './user/user.component';
 import { InterceptorInterceptor } from './service/interceptor.interceptor';
 import { CreateuserComponent } from './createuser/createuser.component';
-import { AdminModule } from './admin/admin.module';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { SharedModule } from './shared/shared.module';
 import { CreatemeetingComponent } from './createmeeting/createmeeting.component';
@@ -46,7 +45,6 @@ import { DatePipe } from '@angular/common';
     FormsModule,
     BrowserAnimationsModule,
     MaterialModule,
-    AdminModule,
     SharedModule,
     FullCalendarModule,
   ],

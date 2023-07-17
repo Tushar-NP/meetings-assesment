@@ -51,18 +51,7 @@ export class ServiceService {
   }
 
   updateUser(data: any) {
-    console.log(data);
-    this.http.post(apiURL + '/api-v1/admin/update-member', data).subscribe(
-      (data: any) => {
-        console.log(data);
-      },
-      (error) => {
-        if (error.error == 'Token is Expired') {
-          this.router.navigate(['']);
-          localStorage.clear();
-        }
-      }
-    );
+    return this.http.post(apiURL + '/api-v1/admin/update-member', data);
   }
 
   deleteUser(userName: string) {
@@ -78,21 +67,7 @@ export class ServiceService {
   }
 
   displayAllUser() {
-    return this.http.get(apiURL + '/api-v1/admin/all-users');
-  }
-
-  loogedInUser() {
-    this.http.post(apiURL + '/api-v1/user/member', null).subscribe(
-      (data) => {
-        console.log(data);
-      },
-      (error) => {
-        if (error.error == 'Token is Expired') {
-          this.router.navigate(['']);
-          localStorage.clear();
-        }
-      }
-    );
+    return this.http.get(apiURL + '/api-v1/user/all-users');
   }
 
   currentUser() {

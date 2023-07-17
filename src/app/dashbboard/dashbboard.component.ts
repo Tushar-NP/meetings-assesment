@@ -18,6 +18,7 @@ export class DashbboardComponent implements OnInit {
   activeUsers: any;
   name: any;
   start: any;
+  admin: boolean = false;
   constructor(
     private service: ServiceService,
     private router: Router,
@@ -25,11 +26,15 @@ export class DashbboardComponent implements OnInit {
     private datePipe: DatePipe
   ) {}
   allMeetings: any;
-  todayMeetings: any;
+  todayMeetings: any = 0;
   futureMeetings: any;
 
   ngOnInit(): void {
     this.date = new Date().toDateString();
+
+    if (localStorage.getItem('role') == 'ROLE_ADMIN') {
+      this.admin = true;
+    }
 
     this.service.displayAllUser().subscribe(
       (result: any) => {
@@ -74,7 +79,7 @@ export class DashbboardComponent implements OnInit {
     this.service.allMeeting().subscribe(
       (result: any) => {
         this.allMeetings = result.allMeetings;
-        this.todayMeetings = result.todayMeetings;
+        this.todayMeetings = result.todaysMeetings;
         this.futureMeetings = result.futureMeetings;
       },
       (error: any) => {

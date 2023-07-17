@@ -22,6 +22,30 @@ export class LoginComponent implements OnInit {
       username: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required]),
     });
+
+    function addOneHourToTime(inputTime: string): string {
+      const inputDate = new Date(inputTime);
+      const newTime = new Date(inputDate.getTime() + 60 * 60 * 1000); // Adding one hour in milliseconds
+
+      const formattedTime = `${newTime.getFullYear()}-${formatNumber(
+        newTime.getMonth() + 1
+      )}-${formatNumber(newTime.getDate())} ${formatNumber(
+        newTime.getHours()
+      )}:${formatNumber(newTime.getMinutes())}:${formatNumber(
+        newTime.getSeconds()
+      )}`;
+
+      return formattedTime;
+    }
+
+    function formatNumber(num: number): string {
+      return num.toString().padStart(2, '0');
+    }
+
+    // Test
+    const inputTime = '2023-07-17 09:40:37';
+    const newTime = addOneHourToTime(inputTime);
+    console.log(newTime); // Output: "2023-07-17 10:40:37"
   }
 
   constructor(
@@ -43,7 +67,6 @@ export class LoginComponent implements OnInit {
     }
     this.service.login(data).subscribe(
       (result: any) => {
-        console.log(result);
         let body: any = result.body;
         localStorage.setItem('token', body['token']);
         localStorage.setItem('role', body['role']);

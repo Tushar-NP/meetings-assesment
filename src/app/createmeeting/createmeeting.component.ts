@@ -33,6 +33,7 @@ export class CreatemeetingComponent implements ErrorStateMatcher, OnInit {
     private datePipe: DatePipe
   ) {}
   form!: FormGroup;
+  ishost: boolean = false;
   update: boolean = false;
   members: any = [];
   ngOnInit(): void {
@@ -53,13 +54,20 @@ export class CreatemeetingComponent implements ErrorStateMatcher, OnInit {
       meetid: new FormControl('', [Validators.required]),
     });
 
+    this.endTime();
     if (this.data.title) {
+      this.service.currentUser().subscribe((res: any) => {
+        if (res.username === this.data.extendedProps.host.username)
+          this.ishost = true;
+      });
       this.update = true;
       const start = this.datePipe.transform(
         this.data.start,
         'yyyy-MM-dd HH:mm:ss'
       );
+
       const end = this.datePipe.transform(this.data.end, 'yyyy-MM-dd HH:mm:ss');
+
       this.form.patchValue({
         title: this.data.title,
         description: this.data.extendedProps.description,
@@ -68,7 +76,11 @@ export class CreatemeetingComponent implements ErrorStateMatcher, OnInit {
         meetid: this.data.extendedProps.meetid,
       });
     } else {
-      this.form.patchValue(this.data);
+      const end = this.endTime();
+      this.form.patchValue({
+        start: this.data.start,
+        end: end,
+      });
     }
   }
 
@@ -105,40 +117,40 @@ export class CreatemeetingComponent implements ErrorStateMatcher, OnInit {
   matcher = new ErrorStateMatcher();
 
   createMeeting() {
-    // if (this.update) {
-    //   this.service.rescheduleMeetings(this.form.value).subscribe(
-    //     (result: any) => {
-    //       this._snackBar.open(result.message, 'close');
-    //     },
-    //     (error: any) => {
-    //       console.log(error);
-    //       this._snackBar.open(error.message, 'close');
-    //     }
-    //   );
-    // } else {
-    //   this.service.createMeetings(this.form.value).subscribe(
-    //     (result) => {
-    //       console.log(result);
-    //     },
-    //     (error: any) => {
-    //       if (error.error == 'Token is Expired') {
-    //         this.router.navigate(['']);
-    //         localStorage.clear();
-    //       }
-    //     }
-    //   );
-    //   console.log(this.form.value);
-    // }
+    if (this.update) {
+      this.service.rescheduleMeetings(this.form.value).subscribe(
+        (result: any) => {
+          this._snackBar.open(result.statusDesc, 'close');
+        },
+        (error: any) => {
+          console.log(error);
+          this._snackBar.open(error.message, 'close');
+        }
+      );
+    } else {
+      this.service.createMeetings(this.form.value).subscribe(
+        (result: any) => {
+          this._snackBar.open(result.statusDesc, 'close', { duration: 5000 });
+        },
+        (error: any) => {
+          if (error.error == 'Token is Expired') {
+            this.router.navigate(['']);
+            localStorage.clear();
+          }
+        }
+      );
+    }
     this.dialogRef.close();
   }
 
   deleteMeeting() {
     this.service.deleteMeetings(this.data.extendedProps.meetid).subscribe(
-      (result) => {
+      (result: any) => {
         console.log(result);
-        this._snackBar.open('Meeting Deleted Successfully', 'close');
+        this._snackBar.open(result.statusDesc, 'close');
       },
       (error: any) => {
+        console.log(error);
         if (error.error == 'Token is Expired') {
           this._snackBar.open('Unable to Deleted Meeting', 'close');
           this.router.navigate(['']);
@@ -147,5 +159,22 @@ export class CreatemeetingComponent implements ErrorStateMatcher, OnInit {
       }
     );
     this.dialogRef.close();
+  }
+
+  endTime() {
+    const date = this.data.start;
+    const endTime: any = new Date(date).getTime() + 60 * 60 * 1000;
+    const formattedTime = `${new Date(endTime).getFullYear()}-${this.formatTime(
+      new Date(endTime).getMonth() + 1
+    )}-${this.formatTime(new Date(endTime).getDate())} ${this.formatTime(
+      new Date(endTime).getHours()
+    )}:${this.formatTime(new Date(endTime).getMinutes())}:${this.formatTime(
+      new Date(endTime).getSeconds()
+    )}`;
+    return formattedTime;
+  }
+
+  formatTime(num: Number) {
+    return num.toString().padStart(2, '0');
   }
 }
